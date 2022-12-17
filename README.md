@@ -1,21 +1,21 @@
 # Ethernaut Notes
 Notes on [Ethernaut](https://ethernaut.openzeppelin.com) exercises.
 
-# 1. Ethernaut 
+# 00. Ethernaut 
 * Just go through the console.
 * Check out all the ABIs. 
 * Password will be shown in a function. 
 
-# 2. FallBack
+# 01. FallBack
 * Getting the various RPC functions like the one to send Transaction. 
 * Finding the diffrence between receive and fallback functions in solidity. 
 * Sending ether to contract thus changing the owner to msg.sender.
 
-# 3. Fallout
+# 02. Fallout
 * Read the code.
 * Just Calling Fal1out function will make us the owner. 
 
-# 4. Coinflip
+# 03. Coinflip
 * Generating randomness inside a contract using globally available values or Hardcoded values is a Big NO.
 * Everything you use in smart contracts is publicly visible, including the local variables and state variables marked as private.
 * Using an another contract attacker can hack that randomness.
@@ -45,7 +45,7 @@ contract CoinFlipAttack {
     }  
 }
 ```
-# 5. Telephone 
+# 04. Telephone 
 * ```tx.origin``` and ```msg.sender``` Shows same value only if EOA (Externally owned address) is used to call.
 * By using another Smart contract to call the function we can take advantage of this contract because Smart contracts are not EOA so ```tx.origin``` changes.
 ```
