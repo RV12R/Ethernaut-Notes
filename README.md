@@ -71,4 +71,10 @@ contract TeleAttack {
 * It is called integer Overflow or Underflow many cyber attacks in our history not only in EVM takes advantage of this issue.
 * Because uint is an non negative integer type when we transfer an amount greater than 20 our balance will have this underflow situation. 
 
+# 06. Delegation
+* As the word meaning say Delegate call uses memory of the orginal contract and can execute codes on the target contract.
+* Usage of delegatecall is particularly risky and has been used as an attack vector on multiple historic hacks. 
+* Here by creating a variable to call the ```pwn``` function in the target contract inside the console and passing it through the ```fallout``` function will make us the owner. ```var _pwned = web3.utils.keccak256("pwn()") ```
+* Here data passed into the fallout function is used for calling the target contract using ```.delegatecall()```
+ 
  
