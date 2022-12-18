@@ -67,7 +67,7 @@ contract TeleAttack {
 } 
 ```  
 # 05. Token
-* As the hint says taking the case of an classic odometer in over vehicles it has a max and min value. What happens when we go beyond that?
+* As the hint says taking the case of an classic odometer in our vehicles it has a max and min value. What happens when we go beyond that?
 * It is called integer Overflow or Underflow many cyber attacks in our history not only in EVM takes advantage of this issue.
 * Because uint is an non negative integer type when we transfer an amount greater than 20 our balance will have this underflow situation. 
 
