@@ -106,3 +106,11 @@ contract forceit {
 * send that 32 byte data into unlock function to unlock the vault. 
 * To ensure that data is private, it needs to be encrypted before being put onto the blockchain. In this scenario, the decryption key should never be sent on-chain, as it will then be visible to anyone who looks for it.
  
+# 09. King
+* Here we are doing a DOS attack on the contract because even if we sent the biggest possible amount ```require(msg.value >= prize || msg.sender == owner)``` owner can't be changed and he can always be the King.
+* So we send 1 wei more than the current king and use our fallback function to make a DOS. So that when it try to send ETH back we just revert it.  
+```
+fallback() external payable {
+    revert("I'm the only KING");
+}
+```
