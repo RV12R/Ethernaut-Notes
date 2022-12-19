@@ -100,4 +100,9 @@ contract forceit {
     
 }
 ```
+# 08. Vault
+* It's important to remember that marking a variable as private only prevents other contracts from accessing it. State variables marked as private and local variables are still publicly accessible.
+* Here we can access the ```_password``` by finding its memory location( Here 0 for bool and 1 for bytes32 ) and calling that location using ``` await web3.eth.getStorageAt(instance, 1, console.log) ``` which gives us the data.
+* send that 32 byte data into unlock function to unlock the vault. 
+* To ensure that data is private, it needs to be encrypted before being put onto the blockchain. In this scenario, the decryption key should never be sent on-chain, as it will then be visible to anyone who looks for it.
  
