@@ -1,5 +1,5 @@
 # Ethernaut Notes
-Notes on [Ethernaut](https://ethernaut.openzeppelin.com) exercises.
+My Notes on [Ethernaut](https://ethernaut.openzeppelin.com) exercises.
 
 # 00. Ethernaut 
 * Just go through the console.
