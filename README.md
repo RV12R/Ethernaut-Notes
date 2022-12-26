@@ -146,3 +146,11 @@ contract ReAttack {
     }
 }
 ```
+
+# 11. Elevator
+* Here we can modify the state of the interface function ```isLastFloor``` using a malicious contract.
+* Because the function ```isLastFloor``` is an ```external``` function with no ```view``` or ```pure``` alias. 
+* You can use the view function modifier on an interface in order to prevent state modifications. The pure modifier also prevents functions from modifying the state.
+``` 
+```
+
