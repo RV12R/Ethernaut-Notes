@@ -178,7 +178,8 @@ contract ElevatAttack {
 ```
 # 12. Privacy
 * "Privacy" as we saw earlier in Coinflip nothing is private in blockchain not even the private variables.
-* EVM stores data as slots each slots are 32 bytes or 256 bits in size so each variables are also stored on these slots according to their types.
+* EVM stores data as slots each slots are 32 bytes or 256 bits in size so each variables are stored on these slots according to their types.
 * In this contract 6 slots are used for the variables : 1 for bool, 1 for uint256, 1 for 2*uint8 + uint16 and 3 for bytes32[3]. 
 * Here in the require statement data[2] means the 3rd slot for the bytes[3] Because it is stored as 0, 1 and 2.
-* We can get the data of each slots from ``` getStorageAt(...) ``` function of [web3.js](https://web3js.readthedocs.io/en/v1.8.1/web3-eth.html#getstorageat), here we want the data from the 6th slot (i.e, 5th position), convert that to bytes16 and pass that to unlock function. 
+* We can get the data of each slots from ``` getStorageAt(...) ``` function of [web3.js](https://web3js.readthedocs.io/en/v1.8.1/web3-eth.html#getstorageat).
+* Here we take the data from the 6th slot (i.e, 5th position), convert that to bytes16 and pass that to unlock function. 
