@@ -176,4 +176,4 @@ contract ElevatAttack {
     }
 }
 ```
-
+12. Privacy
