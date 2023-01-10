@@ -185,4 +185,5 @@ contract ElevatAttack {
 * Here we take the data from the 6th slot (i.e, 5th position), convert that to bytes16 and pass that to unlock function. 
 
 # 13. Gatekeeper One
+* Any interaction with another contract imposes a potential danger, especially if the source code of the contract is not known in advance. The current contract hands over control to the called contract and that may potentially do just about anything. Even if the called contract inherits from a known parent contract, the inheriting contract is only required to have a correct interface. 
 
