@@ -184,6 +184,8 @@ contract ElevatAttack {
 * We can get the data of each slots from ``` getStorageAt(...) ``` function of [web3.js](https://web3js.readthedocs.io/en/v1.8.1/web3-eth.html#getstorageat).
 * Here we take the data from the 6th slot (i.e, 5th position), convert that to bytes16 and pass that to unlock function. 
 
-# 13. Gatekeeper One
-* Any interaction with another contract imposes a potential danger, especially if the source code of the contract is not known in advance. The current contract hands over control to the called contract and that may potentially do just about anything. Even if the called contract inherits from a known parent contract, the inheriting contract is only required to have a correct interface. 
+# 13. Gatekeeper One 
+* Here there are 3 modifiers that we need to crack in that first GateOne is same as the Telephone challange we just have to call the function from an contract.
+* Second one uses an inbuilt function named gasleft() which is used to return the gas left in that contract.
+* Third one looks challenging but it just take specific bits from each inputs and checks the equality. We can see tx.origin is the key used here.
 
