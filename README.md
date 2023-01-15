@@ -187,5 +187,5 @@ contract ElevatAttack {
 # 13. Gatekeeper One 
 * Here there are 3 modifiers that we need to crack in that first GateOne is same as the Telephone challange we just have to call the function from an contract.
 * Second one uses an inbuilt function named gasleft() which is used to return the gas left in that contract.
-* Third one looks challenging but it just take specific bits from each inputs and checks the equality. We can see tx.origin is the key used here.
+* Third one looks challenging but it just takes specific bits from each inputs and checks the equality. We can see tx.origin is the key used here.
 
