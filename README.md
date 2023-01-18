@@ -211,3 +211,6 @@ contract ElevatAttack {
 }
   ```
 
+14. GateKeeper Two
+* The language used for inline assembly in Solidity is called Yul, it is a low level language.
+* 
