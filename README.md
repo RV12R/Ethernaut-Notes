@@ -211,7 +211,7 @@ contract ElevatAttack {
 }
   ```
 
-14. GateKeeper Two
+# 14. GateKeeper Two
 * The first modifier GateOne is a general one that we have cracked before. The second one looks for the size of the caller that is, if caller is EOA its size will be Zero but if its a smart contract its size will not be zero.  
 * But we can crack GateTwo by calling the function inside the constructor of our attack contract because constructor is called before the coontract creation so the size of the contract at that time will be zero.
 * GateThree looks complicated but if we know the principle behind XOR bitwise operation we can crack that. If A XOR B is C, then C XOR B will be equal to A, using this inside our attack contract we can find the key and become the entrant.
