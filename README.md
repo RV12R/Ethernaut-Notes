@@ -231,3 +231,5 @@ contract G2Hack {
 ```
 
 # 15.Naught coin
+* Becuase the contract is intialised as an ERC20 there are several [functions from ERC20](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20.md) that are hidden in this contract(they will be present inside the ABI) and we can take advantage of. 
+* ```approve()``` which is connected to ```transferFrom()``` function using these two we can get rid of the time lock.
