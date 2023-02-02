@@ -230,4 +230,4 @@ contract G2Hack {
 }
 ```
 
-#15.
+# 15.Naught coin
