@@ -235,3 +235,9 @@ contract G2Hack {
 * ```approve()``` which is connected to ```transferFrom()``` function using these two we can get rid of the time lock.
 
 # 16. Preservation
+* As we have seen earlier here we can improve our understanding of how storage and delegate calls works.
+* Here we need to change the ownership of the contract but there is no function specified for that but we can see the other function which delegate call into a so called library contract.
+* The issue with that library contract is it has a state variable ```uint storedTime ``` which changes when we call that function inside the library.
+* The real problem happens when we delegate call into that contract, as we know delegate call use the memory of the contract which calls the other (library contract). When the variable ```storedTime``` changes it is actually happening in the memory slot of the contract which delgatecall (Presrvation contract), where slot 1 of it has `address public timeZone1Library;`.
+* So we can swap `address public timeZone1Library;` with an attack contract's address by calling `function setFirstTime` with attack contract's address as argument. Inside that contract we can write a fuction named `setTime` which changes owner into msg.sender. 
+* Remember to initialize the variables inside attack contract same as preservance contract so that the slots are correctly ordered.  
