@@ -242,3 +242,5 @@ contract G2Hack {
 * So we can swap `address public timeZone1Library;` with an attack contract's address by calling `function setFirstTime` with attack contract's address as argument. Inside that contract we can write a fuction named `setTime` which changes owner into msg.sender. 
 * Remember to initialize the variables inside attack contract same as preservance contract so that the slots are correctly ordered.  
 * #### Take: As the previous level, delegate mentions, the use of delegatecall to call libraries can be risky. This is particularly true for contract libraries that have their own state. This example demonstrates why the library keyword should be used for building libraries, as it prevents the libraries from storing and accessing state variables.
+
+# 16.Recovery
