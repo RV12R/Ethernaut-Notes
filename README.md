@@ -244,4 +244,13 @@ contract G2Hack {
 * #### Take: As the previous level, delegate mentions, the use of delegatecall to call libraries can be risky. This is particularly true for contract libraries that have their own state. This example demonstrates why the library keyword should be used for building libraries, as it prevents the libraries from storing and accessing state variables.
 
 # 16.Recovery
-* 
+* Here we need to get the contract address of the `SimpleToken` that was created at the time of the creation of level instance then we can call the `destroy` function of that contract.
+* There is 2 ways to get that address the simplest and best way is to check the ethercan the other one is to recreate that address using our instance address and nounce the method for that is explained in this [Stackexchange](https://ethereum.stackexchange.com/questions/760/how-is-the-address-of-an-ethereum-contract-computed) querry.
+* After getting that address we can call the `destruct` function using an Attack contract.
+```
+contract Attack {
+    function RecoveryAttack(address payable _simpleToken) public {
+        SimpleToken(_simpleToken).destroy(payable(msg.sender));
+    }
+}
+```  
