@@ -245,7 +245,7 @@ contract G2Hack {
 
 # 16.Recovery
 * Here we need to get the contract address of the `SimpleToken` that was created at the time of the creation of level instance then we can call the `destroy` function of that contract.
-* There is 2 ways to get that address the simplest and best way is to check the ethercan the other one is to recreate that address using our instance address and nounce the method for that is explained in this [Stackexchange](https://ethereum.stackexchange.com/questions/760/how-is-the-address-of-an-ethereum-contract-computed) querry.
+* There is 2 ways to get that address the simplest and best way is to check the etherscan the other one is to recreate that address using our instance address and nounce the method for that is explained in this [Stackexchange](https://ethereum.stackexchange.com/questions/760/how-is-the-address-of-an-ethereum-contract-computed) querry.
 * After getting that address we can call the `destruct` function using an Attack contract.
 ```
 contract Attack {
