@@ -255,4 +255,4 @@ contract Attack {
 }
 ```  
 
-# 17.
+# 17. Magic number
