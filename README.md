@@ -255,4 +255,4 @@ contract Attack {
 }
 ```  
 
-# 17. Magic number
+# 17. Magic number 42
