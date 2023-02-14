@@ -256,3 +256,4 @@ contract Attack {
 ```  
 
 # 17. Magic number 42
+* contract creation code is transaction is with non recipient but with byde code in its data slot which includes initialisation codes (which includes constructor) and whole logic of the contract.
