@@ -256,4 +256,4 @@ contract Attack {
 ```  
 
 # 17. Magic number 42
-* contract creation code is transaction is with non recipient but with byte code in its data slot which includes initialisation codes (which includes constructor) and runtime code of the contract. There are specific opcodes for everything like these
+* contract creation code is transaction is with non recipient but with byte code in its data slot which includes initialisation codes (which includes constructor) and runtime code of the contract. There are specific opcodes for everything in EVM.
