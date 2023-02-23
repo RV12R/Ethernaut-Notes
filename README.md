@@ -256,4 +256,4 @@ contract Attack {
 ```  
 
 # 17. Magic number 42
-* contract creation code is a transaction with no recipient but with byte code in its data slot which includes initialisation code (which includes constructor) and runtime code of the contract.
+* Contract creation code is a transaction with no recipient but with byte code in its data slot which includes initialisation code (which includes constructor) and runtime code of the contract.
