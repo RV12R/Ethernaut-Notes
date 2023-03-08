@@ -256,5 +256,6 @@ contract Attack {
 ```  
 
 # 17. Magic number 42
-* Contract creation code is a transaction with no recipient but with byte code in its data slot which includes initialisation code (which includes constructor) and runtime code of the contract.
-* 
+* Contract creation is a transaction with no recipient but with byte code in its data slot which includes initialisation code (which includes constructor) and runtime code of the contract.
+* Smart contract code is compiled to bytecode inside the compiler code written in solidity is converted into opcodes where each opcodes has their own byte representation which as a whole is the bytecode.
+* We have to find specific opcodes with the help of charts or from any other resources and construct a bytecode which perform this specific function of returning number 42. 
