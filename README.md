@@ -258,4 +258,41 @@ contract Attack {
 # 17. Magic number 42
 * Contract creation is a transaction with no recipient but with byte code in its data slot which includes initialisation code (which includes constructor) and runtime code of the contract.
 * Smart contract code is compiled to bytecode inside the compiler code written in solidity is converted into opcodes where each opcodes has their own byte representation which as a whole is the bytecode.
-* We have to find specific opcodes with the help of charts or from any other resources and construct a bytecode which perform this specific function of returning number 42. 
+* We have to find specific opcodes with the help of [charts](https://ethereum.org/en/developers/docs/evm/opcodes/) or from any other resources and construct a bytecode which perform this specific function of returning number 42. 
+* We can interact with the contract either from Ethernaut browser console or by using a contract. The contract that can be used to ocrack this level is given below.
+```
+contract Hack {
+    constructor(MagicNum target) {
+        bytes memory bytecode = hex"69602a60005260206000f3600052600a6016f3";
+        address addr;
+
+        assembly {
+            addr:= create(0, add(bytecode, 0x20), 0x13)
+        }
+
+        require(addr != address(0));
+        target.setSolver(addr);
+    }
+}
+```
+* Here `69602a60005260206000f3600052600a6016f3` is the bytecode which has the creation code and runtime code for returning the number 42. This can be understood easily by spliting the bytecode and cross checking it with the chart.
+```
+Creation code (10 OPCODES)
+-------------
+
+69 602a60005260206000f3  | PUSH10 0x602a60005260206000f3
+60 00                    | PUSH1 0x0
+52                       | MSTORE
+60 0a                    | PUSH1 0xa
+60 16                    | PUSH1 0x16
+f3                       | RETURN
+
+Runtime code (602a60005260206000f3)
+------------
+60 2a                    | PUSH1 0x2a
+60 00                    | PUSH1 0x0
+52                       | MSTORE
+60 20                    | PUSH1 0x20
+60 00                    | PUSH1 0x0
+f3                       | RETURN
+```
