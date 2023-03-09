@@ -4,7 +4,7 @@ My Notes on [Ethernaut](https://ethernaut.openzeppelin.com) exercises.
 # 00. Ethernaut 
 * Just go through the console.
 * Check out all the ABIs. 
-* Password will be given inside a function as a variable. 
+* Password is inside a function as a variable. 
 
 # 01. FallBack
 * Getting the various RPC functions like the one to send Transaction. 
