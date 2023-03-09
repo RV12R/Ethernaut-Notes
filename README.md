@@ -296,3 +296,4 @@ Runtime code (602a60005260206000f3)
 60 00                    | PUSH1 0x0
 f3                       | RETURN
 ```
+* From browser console set this bytecode into a variable `bytecode` and use `web3.eth.sendTransaction(from: player, data: bytecode)` to crack the level.
