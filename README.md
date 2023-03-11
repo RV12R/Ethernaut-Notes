@@ -297,3 +297,6 @@ Runtime code (602a60005260206000f3)
 f3                       | RETURN
 ```
 * From browser console set this bytecode into a variable `bytecode` and use `web3.eth.sendTransaction(from: player, data: bytecode)` to crack the level.
+
+# 18. Alien codex
+* Here we can exploit the `retract()` function because its not checking for the underflow or overflow of the array.
