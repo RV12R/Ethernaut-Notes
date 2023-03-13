@@ -332,7 +332,7 @@ contract Hack {
 ```
 * Here h shows how a dynammic array stores values in diffrent memory positions by hashing the slot number of codex and slot 0 (here i) can be found by taking negative of h i.e, slot 0 = slot h - i, h - i = 0, i = h - 0. 
 
-#19. Denial
+# 19. Denial
 * Here we can perform a DOS attack on the `Withdraw()` function by setting the partner address to an external contract, because while the `withdraw()` performs a low level call to sent the transaction to partner it doesn't limit the gas value. 
 * We can insert an `invalid()` function from assembly to the `fallback` function.
 ``` 
