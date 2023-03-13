@@ -335,7 +335,8 @@ contract Hack {
 #19. Denial
 * Here we can perform a DOS attack on the `Withdraw()` function by setting the partner address to an external contract, because while the `withdraw()` performs a low level call to sent the transaction to partner it doesn't limit the gas value. 
 * We can insert an `invalid()` function from assembly to the `fallback` function.
-``` fallback() external payable {
+``` 
+fallback() external payable {
         assembly{
             invalid()
         }
