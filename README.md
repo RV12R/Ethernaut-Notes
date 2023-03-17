@@ -344,3 +344,5 @@ fallback() external payable {
 ```
 
 # 20. Shop
+* Here we can take advantage of price function because it is dependent on an external contract and there is no checks on that contract.
+* With an external contract we can use a conditional statement to set price before and after the state of bool value isSold. That is when is isSold bool is false we need to set price to 100 and if its true we can set a lower value. Because `price()` function is called twice before and after the checks.
