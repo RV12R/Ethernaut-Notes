@@ -348,3 +348,4 @@ fallback() external payable {
 * With an external contract we can use a conditional statement to set price before and after the state of bool value isSold. That is when is isSold bool is false we need to set price to 100 and if its true we can set a lower value. Because `price()` function is called twice before and after the checks.
 
 #21. DEX
+* Let's start with
