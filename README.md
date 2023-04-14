@@ -348,4 +348,16 @@ fallback() external payable {
 * With an external contract we can use a conditional statement to set price before and after the state of bool value isSold. That is when is isSold bool is false we need to set price to 100 and if its true we can set a lower value. Because `price()` function is called twice before and after the checks.
 
 #21. DEX
-* Here we can take advantage of the floating point error while calculating the `getSwapPrice`.
+* Here we can take advantage of the floating point error while calculating the `getSwapPrice`. In solidiy division on uint will give a rounded result for eg: 3/2 gives 1.
+* So here when we swap we change the pool like this. 
+
+              DEX       |        player  
+        token1 - token2 | token1 - token2
+        ----------------------------------
+          100     100   |   10      10
+          110     90    |   0       20    
+          86      110   |   24      0    
+          110     80    |   0       30    
+          69      110   |   41      0    
+          110     45    |   0       65   
+          0       90    |   110     20
