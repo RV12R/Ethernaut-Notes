@@ -347,7 +347,7 @@ fallback() external payable {
 * Here we can take advantage of price function because it is dependent on an external contract and there is no checks on that contract.
 * With an external contract we can use a conditional statement to set price before and after the state of bool value isSold. That is when is isSold bool is false we need to set price to 100 and if its true we can set a lower value. Because `price()` function is called twice before and after the checks.
 
-#21. DEX
+# 21. DEX
 * Here we can take advantage of the floating point error while calculating the `getSwapPrice`. In solidiy division on uint will give a rounded result for eg: 3/2 gives 1.
 * So here when we swap we change the pool like this. 
 
@@ -362,7 +362,7 @@ fallback() external payable {
           110     45    |   0       65   
           0       90    |   110     20
 
-#22. DEX2
+# 22. DEX2
 * Unlike challange 21 above here lack of valdation for token 1 and token 2 in swap function will make us take the advantage.
 * Creating 2 evil ERC20 token and passing 1 token of each to the DEX2 contract will allow us to take all the token1 and token2.
 * Then swapping 1 of each evil token for 100 of both token1 and token2 will make us pass this level. 
