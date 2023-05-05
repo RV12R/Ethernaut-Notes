@@ -380,3 +380,7 @@ fallback() external payable {
         dex.swap(address(evilToken1), address(token1), 1);
         dex.swap(address(evilToken2), address(token2), 1);
 ```
+
+# 23. Puzzle wallet
+* The thing we have to look for while using proxy here is the state storage.
+* Here the implimentation contract uses the memory of logic contract and they are not assigned properly so we can take advantage of that.
