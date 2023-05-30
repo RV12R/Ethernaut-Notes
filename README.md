@@ -243,7 +243,7 @@ contract G2Hack {
 * Remember to initialize the variables inside attack contract same as preservance contract so that the slots are correctly ordered.  
 * #### Take: As the previous level, delegate mentions, the use of delegatecall to call libraries can be risky. This is particularly true for contract libraries that have their own state. This example demonstrates why the library keyword should be used for building libraries, as it prevents the libraries from storing and accessing state variables.
 
-# 16.Recovery
+# 17.Recovery
 * Here we need to get the contract address of the `SimpleToken` that was created at the time of the creation of level instance then we can call the `destroy` function of that contract.
 * There is 2 ways to get that address the simplest and best way is to check the etherscan the other one is to recreate that address using our instance address and nounce the method for that is explained in this [Stackexchange](https://ethereum.stackexchange.com/questions/760/how-is-the-address-of-an-ethereum-contract-computed) querry.
 * After getting that address we can call the `destruct` function using an Attack contract.
@@ -255,7 +255,7 @@ contract Attack {
 }
 ```  
 
-# 17. Magic number 42
+# 18. Magic number 42
 * Contract creation is a transaction with no recipient but with byte code in its data slot which includes initialisation code (which includes constructor) and runtime code of the contract.
 * Smart contract code is compiled to bytecode inside the compiler code written in solidity is converted into opcodes where each opcodes has their own byte representation which as a whole is the bytecode.
 * We have to find specific opcodes with the help of [charts](https://ethereum.org/en/developers/docs/evm/opcodes/) or from any other resources and construct a bytecode which perform this specific function of returning number 42. 
@@ -298,7 +298,7 @@ f3                       | RETURN
 ```
 * From browser console set this bytecode into a variable `bytecode` and use `web3.eth.sendTransaction(from: player, data: bytecode)` to crack the level.
 
-# 18. Alien codex
+# 19. Alien codex
 * Here we can exploit the `retract()` function because its not checking for the underflow or overflow of the array. Initially the owner and bool value will be assigned to the slot 0 of the storage, slot 1 will be used for storing the length of the dynamic array codex. 
 * After calling the 'retract()' on an empty array the array now takes the whole 2^256 slots of storage, Now we can manipulate the owner on the slot 0 by calling `revise()` function.
 * This level can also be cracked from both the console or using an external contract, Contract used for cracking this level is given below.
@@ -332,7 +332,7 @@ contract Hack {
 ```
 * Here h shows how a dynammic array stores values in diffrent memory positions by hashing the slot number of codex and slot 0 (here i) can be found by taking negative of h i.e, slot 0 = slot h - i, h - i = 0, i = h - 0. 
 
-# 19. Denial
+# 20. Denial
 * Here we can perform a DOS attack on the `Withdraw()` function by setting the partner address to an external contract, because while the `withdraw()` performs a low level call to sent the transaction to partner it doesn't limit the gas value. 
 * We can insert an `invalid()` function from assembly to the `fallback` function.
 ``` 
@@ -343,11 +343,11 @@ fallback() external payable {
     } 
 ```
 
-# 20. Shop
+# 21. Shop
 * Here we can take advantage of price function because it is dependent on an external contract and there is no checks on that contract.
 * With an external contract we can use a conditional statement to set price before and after the state of bool value isSold. That is when is isSold bool is false we need to set price to 100 and if its true we can set a lower value. Because `price()` function is called twice before and after the checks.
 
-# 21. DEX
+# 22. DEX
 * Here we can take advantage of the floating point error while calculating the `getSwapPrice`. In solidiy division on uint will give a rounded result for eg: 3/2 gives 1.
 * So here when we swap we change the pool like this. 
 
@@ -362,7 +362,7 @@ fallback() external payable {
           110     45    |   0       65   
           0       90    |   110     20
 
-# 22. DEX2
+# 23. DEX2
 * Unlike challange 21 above here lack of valdation for token 1 and token 2 in swap function will make us take the advantage.
 * Creating 2 evil ERC20 token and passing 1 token of each to the DEX2 contract will allow us to take all the token1 and token2.
 * Then swapping 1 of each evil token for 100 of both token1 and token2 will make us pass this level. 
@@ -381,7 +381,7 @@ fallback() external payable {
         dex.swap(address(evilToken2), address(token2), 1);
 ```
 
-# 23. Puzzle wallet
+# 24. Puzzle wallet
 * The thing we have to look for while using proxy here is the state storage.
 * Here the implimentation contract uses the memory of logic contract and they are not assigned properly so we can take advantage of that.
 ```
@@ -433,7 +433,7 @@ contract Hack {
     }
 ```
 
-# 24. Motorbike
+# 25. Motorbike
 * Here the important thing we have to do is going through the upgrader variable then we will see that initialize() was not called by the implementaion contract and upgrader is empty.
 * When we call the initialize() we can become the upgrader and change the implementation contract to our malicious contract and calling selfdestruct on that makes the proxy into a permananent block where the funds send to the Motorbike will get stuck in that contract.
 * Here we can get the address of implementation contract by passing `_IMPLEMENTATION_SLOT` into `web3.eth.getStorageAt()` as `web3.eth.getStorageAt(contract.address, "0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc")`.
@@ -455,4 +455,4 @@ contract Hack {
     }
 }
 ```
-# 25.
+# 26. Doubleentry point 
