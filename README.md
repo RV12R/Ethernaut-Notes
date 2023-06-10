@@ -455,5 +455,6 @@ contract Hack {
     }
 }
 ```
-# 26. Doubleentry point 
+# 26. Double entry point 
+* 
 
