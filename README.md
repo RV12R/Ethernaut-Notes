@@ -456,5 +456,4 @@ contract Hack {
 }
 ```
 # 26. Double entry point 
-* 
 
