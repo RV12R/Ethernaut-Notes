@@ -457,6 +457,7 @@ contract Hack {
 ```
 
 # 26. Double entry point
+* This contract features a Forta contract where any user can register its own detection bot contract.
 
 
 
